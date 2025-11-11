@@ -96,3 +96,4 @@ curl -X PATCH http://127.0.0.1:8000/incidents/1/status \
 - Статусы: `open`, `in_progress`, `resolved`, `closed`
 - При отсутствии инцидента возвращается 404.
 
+
