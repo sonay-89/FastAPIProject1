@@ -24,7 +24,7 @@ Incidents API (FastAPI)
    - macOS/Linux: `python3 -m venv .venv && source .venv/bin/activate`
    - Windows (PowerShell): `py -m venv .venv; .\.venv\Scripts\Activate.ps1`
 2) Установите зависимости:
-   - `pip install "fastapi[standard]" uvicorn "sqlalchemy>=2.0"`
+   - `pip install "fastapi[standard]" "sqlalchemy>=2.0"`
 3) Запустите сервер:
    - `uvicorn main:app --reload`
 
@@ -91,8 +91,6 @@ curl -X PATCH http://127.0.0.1:8000/incidents/1/status \
 
 Дополнительно
 -------------
-- Получить инцидент по id:
-  - GET `/incidents/{id}`
 - Статусы: `open`, `in_progress`, `resolved`, `closed`
 - При отсутствии инцидента возвращается 404.
 

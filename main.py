@@ -7,7 +7,7 @@ from pydantic import BaseModel, ConfigDict
 from sqlalchemy import DateTime, Integer, String, create_engine, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
-app = FastAPI(title="Incidents API", version="0.1.0")
+app = FastAPI()
 
 
 # Database setup (SQLite)
@@ -32,11 +32,11 @@ class IncidentStatus(str, PyEnum):
 class Incident(Base):
     __tablename__ = "incidents"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     description: Mapped[str] = mapped_column(String(1000), nullable=False)
-    status: Mapped[str] = mapped_column(String(50), nullable=False, index=True)
-    source: Mapped[str] = mapped_column(String(50), nullable=False, index=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
+    status: Mapped[str] = mapped_column(String(50), nullable=False)
+    source: Mapped[str] = mapped_column(String(50), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
 
 def get_db() -> Generator[Session, None, None]:
@@ -134,13 +134,4 @@ def update_incident_status(
     return IncidentRead.model_validate(incident)
 
 
-@app.get(
-    "/incidents/{incident_id}",
-    response_model=IncidentRead,
-    summary="Get incident by id",
-)
-def get_incident(incident_id: int, db: Session = Depends(get_db)) -> IncidentRead:
-    incident = db.get(Incident, incident_id)
-    if incident is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Incident not found")
-    return IncidentRead.model_validate(incident)
+#

@@ -33,8 +33,4 @@ Content-Type: application/json
 
 ###
 
-# Get incident by id
-GET http://127.0.0.1:8000/incidents/1
-Accept: application/json
-
-### 
+###
