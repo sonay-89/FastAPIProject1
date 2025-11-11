@@ -2,8 +2,49 @@
 
 GET http://127.0.0.1:8000/
 Accept: application/json
+
 ###
 
 GET http://127.0.0.1:8000/hello/User
 Accept: application/json
+
 ###
+
+# Create incident
+POST http://127.0.0.1:8000/incidents
+Content-Type: application/json
+
+{
+  "description": "Самокат #42 не в сети",
+  "source": "operator"
+}
+
+###
+
+# List all incidents
+GET http://127.0.0.1:8000/incidents
+Accept: application/json
+
+###
+
+# List incidents filtered by status
+GET http://127.0.0.1:8000/incidents?status=open
+Accept: application/json
+
+###
+
+# Update incident status by id
+PATCH http://127.0.0.1:8000/incidents/1/status
+Content-Type: application/json
+
+{
+  "status": "resolved"
+}
+
+###
+
+# Get incident by id
+GET http://127.0.0.1:8000/incidents/1
+Accept: application/json
+
+### 
